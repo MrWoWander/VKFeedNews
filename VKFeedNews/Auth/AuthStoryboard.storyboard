@@ -23,8 +23,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gof-2M-J96" secondAttribute="height" multiplier="180:50" constant="1" id="6Oh-zK-Hry"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="25"/>
-                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="30"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Войти в VK"/>
                                 <connections>

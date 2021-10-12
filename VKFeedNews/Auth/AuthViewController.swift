@@ -11,6 +11,12 @@ class AuthViewController: UIViewController {
 
     @IBOutlet weak var goToVKButton: UIButton! {
         didSet {
+            let contentInsets = UIEdgeInsets(top: 0,
+                                             left: 20,
+                                             bottom: 0,
+                                             right: 20)
+            goToVKButton.contentEdgeInsets = contentInsets
+            
             goToVKButton.titleLabel?.adjustsFontSizeToFitWidth = true
         }
     }
