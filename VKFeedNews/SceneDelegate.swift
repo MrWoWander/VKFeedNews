@@ -16,8 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        let storyboard = UIStoryboard(name: "AuthStoryboard", bundle: nil)
-        guard let authVC = storyboard.instantiateInitialViewController() as? AuthViewController else { return }
+        guard let authVC = AuthViewController.loadFromStoryboard(name: "AuthStoryboard") else { return }
         window.rootViewController = authVC
         
         self.window = window

@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        print("AppDelegate")
+
         self.authService = AuthService()
         self.authService.delegate = self
         return true
@@ -58,8 +58,9 @@ extension AppDelegate: AuthServiceDelegate {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first(where: { scene in
             return (scene.delegate as? SceneDelegate) != nil
         })?.delegate as? SceneDelegate {
-            let storyboard = UIStoryboard(name: "FeedStoryboard", bundle: nil)
-            guard let feedVC = storyboard.instantiateInitialViewController() as? FeedViewController else { return }
+            
+            guard let feedVC = FeedViewController.loadFromStoryboard(name: "FeedStoryboard") else { return }
+            
             let navVC = UINavigationController(rootViewController: feedVC)
             sceneDelegate.window?.rootViewController = navVC
         }
