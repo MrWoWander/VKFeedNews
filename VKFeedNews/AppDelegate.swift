@@ -13,9 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var authService: AuthService!
     
+    static func shared() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+//        print("AppDelegate")
         self.authService = AuthService()
+        self.authService.delegate = self
         return true
     }
     
@@ -37,7 +42,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
 
+// MARK: AuthServiceDelegate
+extension AppDelegate: AuthServiceDelegate {
+    func authServiceSholdShow(_ viewController: UIViewController) {
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first(where: { scene in
+            return (scene.delegate as? SceneDelegate) != nil
+        })?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController?.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    func authServiceSingUp() {
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first(where: { scene in
+            return (scene.delegate as? SceneDelegate) != nil
+        })?.delegate as? SceneDelegate {
+            let storyboard = UIStoryboard(name: "FeedStoryboard", bundle: nil)
+            guard let feedVC = storyboard.instantiateInitialViewController() as? FeedViewController else { return }
+            let navVC = UINavigationController(rootViewController: feedVC)
+            sceneDelegate.window?.rootViewController = navVC
+        }
+    }
+    
+    func authServiceDidSignInFail() {
+        print(#function)
+    }
+    
+    
+}

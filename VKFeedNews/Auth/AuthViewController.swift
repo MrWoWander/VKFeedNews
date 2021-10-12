@@ -9,6 +9,8 @@ import UIKit
 
 class AuthViewController: UIViewController {
 
+    private var authService: AuthService!
+    
     @IBOutlet weak var goToVKButton: UIButton! {
         didSet {
             let contentInsets = UIEdgeInsets(top: 0,
@@ -23,12 +25,15 @@ class AuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        self.authService = AppDelegate.shared().authService
         // Do any additional setup after loading the view.
+        
     }
     
 
     @IBAction func goToVKAuth(_ sender: UIButton) {
-        print(#function)
+        self.authService.wakeUpSession()
     }
 
 }
