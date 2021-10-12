@@ -19,16 +19,8 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
 
   // MARK: Object lifecycle
   
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
+    @IBOutlet weak var table: UITableView!
+    
   // MARK: Setup
   
   private func setup() {
@@ -51,10 +43,41 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+      
+      setup()
+      
+      table.delegate = self
+      table.dataSource = self
+      table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+      
   }
   
   func displayData(viewModel: Newsfeed.Model.ViewModel.ViewModelData) {
-
+      switch viewModel {
+      case .some:
+          print(".some viewModel")
+      case .displayNewsfeed:
+          print(".displayNewsfeed viewModel")
+      }
   }
   
+}
+
+extension NewsfeedViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = "index: \(indexPath.row)"
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        interactor?.makeRequest(request: .getFeed)
+    }
+    
 }

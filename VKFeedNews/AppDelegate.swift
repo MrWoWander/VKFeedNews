@@ -59,7 +59,7 @@ extension AppDelegate: AuthServiceDelegate {
             return (scene.delegate as? SceneDelegate) != nil
         })?.delegate as? SceneDelegate {
             
-            guard let feedVC = FeedViewController.loadFromStoryboard(name: "FeedStoryboard") else { return }
+            guard let feedVC = NewsfeedViewController.loadFromStoryboard(name: "NewsfeedStoryboard") else { return }
             
             let navVC = UINavigationController(rootViewController: feedVC)
             sceneDelegate.window?.rootViewController = navVC
