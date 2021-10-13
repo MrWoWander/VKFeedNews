@@ -18,13 +18,26 @@ protocol FeedCellViewModel {
     var likes: String? { get }
     var shares: String? { get }
     var views: String? { get }
+    var photoAttachment: FeedCellPhotoAttachmentViewModel? { get }
+}
+
+protocol FeedCellPhotoAttachmentViewModel {
+    var photoURLString: String? { get }
+    var width: Int { get }
+    var height: Int { get }
 }
 
 class NewsfeedCell: UITableViewCell {
     
     static let reuseId = "NewsfeedCell"
     
-    @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var iconImage: WebImageView! {
+        didSet {
+            iconImage.layer.cornerRadius = iconImage.frame.width / 2
+            iconImage.clipsToBounds = true
+        }
+    }
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var postLabel: UILabel!
@@ -34,12 +47,15 @@ class NewsfeedCell: UITableViewCell {
     @IBOutlet weak var sharesLabel: UILabel!
     @IBOutlet weak var viewsLabel: UILabel!
     
+    @IBOutlet weak var postImageView: WebImageView!
     
     override class func awakeFromNib() {
         super.awakeFromNib()
+        
     }
     
     func set(viewMode: FeedCellViewModel) {
+        iconImage.set(imageURL: viewMode.iconURLString)
         nameLabel.text = viewMode.name
         dateLabel.text = viewMode.date
         postLabel.text = viewMode.text
@@ -48,6 +64,12 @@ class NewsfeedCell: UITableViewCell {
         sharesLabel.text = viewMode.shares
         viewsLabel.text = viewMode.views
         
+        if let photoAttachment = viewMode.photoAttachment {
+            postImageView.set(imageURL: photoAttachment.photoURLString)
+            postImageView.isHidden = false
+        } else {
+            postImageView.isHidden = true
+        }
     }
     
 }
