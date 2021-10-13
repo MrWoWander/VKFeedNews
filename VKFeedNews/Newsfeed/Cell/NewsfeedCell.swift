@@ -25,6 +25,8 @@ protocol FeedCellViewModel {
 protocol FeedCellSizes {
     var postLabelFrame: CGRect { get }
     var attachmentFrame: CGRect { get }
+    var bottomViewFrame: CGRect { get }
+    var totalHeight: CGFloat { get }
 }
 
 protocol FeedCellPhotoAttachmentViewModel {
@@ -60,6 +62,7 @@ class NewsfeedCell: UITableViewCell {
     @IBOutlet weak var sharesLabel: UILabel!
     @IBOutlet weak var viewsLabel: UILabel!
     
+    @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var postImageView: WebImageView!
     
     override func awakeFromNib() {
@@ -88,6 +91,8 @@ class NewsfeedCell: UITableViewCell {
         } else {
             postImageView.isHidden = true
         }
+        
+        bottomView.frame = viewMode.sizes.bottomViewFrame
     }
     
 }
