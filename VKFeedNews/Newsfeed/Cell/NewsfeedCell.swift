@@ -72,6 +72,11 @@ class NewsfeedCell: UITableViewCell {
         selectionStyle = .none
     }
     
+    override func prepareForReuse() {
+        iconImage.set(imageURL: nil)
+        postImageView.set(imageURL: nil)
+    }
+    
     func set(viewMode: FeedCellViewModel) {
         iconImage.set(imageURL: viewMode.iconURLString)
         nameLabel.text = viewMode.name
