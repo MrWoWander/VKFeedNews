@@ -141,6 +141,7 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottomView" destination="4Tf-gi-qKO" id="Eij-qd-MNe"/>
                 <outlet property="cardView" destination="SPX-gf-tfX" id="tNp-RE-Kjt"/>
                 <outlet property="commentsLabel" destination="a6V-Ml-X0t" id="uNB-KA-h2B"/>
                 <outlet property="dateLabel" destination="aXs-bi-7fs" id="nd7-f0-Xjj"/>
