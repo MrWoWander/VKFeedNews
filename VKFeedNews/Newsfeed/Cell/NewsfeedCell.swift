@@ -9,6 +9,17 @@
 import Foundation
 import UIKit
 
+protocol FeedCellViewModel {
+    var iconURLString: String { get }
+    var name: String { get }
+    var date: String { get }
+    var text: String? { get }
+    var comments: String? { get }
+    var likes: String? { get }
+    var shares: String? { get }
+    var views: String? { get }
+}
+
 class NewsfeedCell: UITableViewCell {
     
     static let reuseId = "NewsfeedCell"
@@ -26,6 +37,17 @@ class NewsfeedCell: UITableViewCell {
     
     override class func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    func set(viewMode: FeedCellViewModel) {
+        nameLabel.text = viewMode.name
+        dateLabel.text = viewMode.date
+        postLabel.text = viewMode.text
+        likesLabel.text = viewMode.likes
+        commentsLabel.text = viewMode.comments
+        sharesLabel.text = viewMode.shares
+        viewsLabel.text = viewMode.views
+        
     }
     
 }
